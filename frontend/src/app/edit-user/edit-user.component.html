@@ -1,1 +1,26 @@
-<p>edit-user works!</p>
+<mat-card>
+    <mat-card-content>
+        <h2>Edit User</h2>
+        <div class="flex">
+            <form class="w-100" [formGroup]="userForm">
+                    <mat-form-field class="w-100">
+                        <mat-label>Name</mat-label>
+                        <input matInput type="text" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label>Age</mat-label>
+                        <input matInput matInput type="number" formControlName="age">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-label>Contact</mat-label>
+                        <input matInput matInput type="number" formControlName="contact">
+                    </mat-form-field>
+                <button mat-raised-button color="primary" (click)="updateUser()">Update User</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

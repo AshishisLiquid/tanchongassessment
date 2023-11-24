@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getUser(id: string): Observable<User>{
-    return this.httpClient.get<User>(`http://localhost:3000/getUser/${id}`)
+    return this.httpClient.get<User>(`http://localhost:3000/user/${id}`)
   }
 
   createUser(user: User): Observable<User>{
@@ -23,10 +23,10 @@ export class UserService {
   }
 
   updateUser(user: User, id: string): Observable<User>{
-    return this.httpClient.put<User>(`http://localhost:3000/updateUser/${id}`, user)
+    return this.httpClient.put<User>(`http://localhost:3000/user/${id}`, user)
   }
 
   deleteUser(id: string): Observable<User>{
-    return this.httpClient.delete<User>(`http://localhost:3000/deleteUser/${id}`)
+    return this.httpClient.delete<User>(`http://localhost:3000/user/${id}`)
   }
 }

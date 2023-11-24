@@ -9,26 +9,25 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { CreateUserComponent } from './create-user/create-user.component'; 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './shared/material.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from './shared/user.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EditUserComponent,
-    CreateUserComponent
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    SharedModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgbModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [UserService],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

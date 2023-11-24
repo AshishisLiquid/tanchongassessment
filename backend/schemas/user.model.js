@@ -16,7 +16,6 @@ const UsersSchema = new Schema(
         email: {
             type: String,
             required: [true, 'Email field is required'],
-            unique: true,
             validate: {
                 validator: function(v) {
                     return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(v);

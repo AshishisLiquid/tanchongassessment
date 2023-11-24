@@ -26,4 +26,8 @@ export class HomeComponent {
       this.users$ = this.userService.getUsers();
     })
   }
+
+  editUser(user: User): void{
+    this.router.navigate([`/edit-user/${user._id}`]);
+  }
 }
