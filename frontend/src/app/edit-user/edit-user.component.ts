@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../shared/users.types';
 import { UserService } from '../shared/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-user',
@@ -13,7 +14,7 @@ export class EditUserComponent {
   userForm!: FormGroup;
   id!: string;
   user!: User
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, private snack: MatSnackBar) { }
   ngOnInit() {
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -37,16 +38,16 @@ export class EditUserComponent {
     });
   }
 
-  updateUser(){
-    if(this.userForm.invalid){
+  updateUser() {
+    if (this.userForm.invalid) {
       return;
     }
     this.userService.updateUser(this.userForm.value, this.id).subscribe((user: User) => {
       console.log('here');
-      alert('User Updated Successfully');
+      this.snack.open('User Updated Successfully', undefined, { duration: 2000 });
       this.router.navigate(['/']);
     }, err => {
-      alert('Something Went Wrong');
+      this.snack.open('Something went wrong', undefined, { duration: 2000 });
     })
   }
 }

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title class="title">Confirmation</h1>
+<div mat-dialog-content class="content">
+  <p>Do you want to Delete {{user.name}}?</p>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="onYesClick()" cdkFocusInitial>Yes</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">No</button>
+</div>

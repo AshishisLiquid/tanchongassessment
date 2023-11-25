@@ -1,0 +1,19 @@
+{
+  "name": "tanchongassessment",
+  "version": "1.0.0",
+  "description": "This repository contains the code and documentation for the Tan Chong Motors assessment project.",
+  "scripts": {
+    "server": "cd backend && nodemon index.js",
+    "client": "cd frontend && ng serve -o"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshishisLiquid/tanchongassessment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshishisLiquid/tanchongassessment/issues"
+  },
+  "homepage": "https://github.com/AshishisLiquid/tanchongassessment#readme"
+}

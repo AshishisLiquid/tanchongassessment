@@ -14,10 +14,13 @@ import { MatCardModule } from "@angular/material/card";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { RouterModule } from '@angular/router';
 import { ShellComponent } from './shell/shell.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const components = [
-  ShellComponent
+  ShellComponent,
+  ConfirmDialogComponent
 ]
 const modules = [
   CommonModule,
@@ -33,7 +36,8 @@ const modules = [
   MatFormFieldModule,
   MatInputModule,
   MatSnackBarModule,
-  RouterModule
+  RouterModule,
+  MatDialogModule
 ]
 
 @NgModule({

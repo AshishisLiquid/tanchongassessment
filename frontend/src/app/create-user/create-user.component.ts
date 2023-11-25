@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-user',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class CreateUserComponent {
   userForm!: FormGroup;
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private snack: MatSnackBar) { }
   ngOnInit() {
     this.userForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -25,8 +26,10 @@ export class CreateUserComponent {
       return;
     }
     this.userService.createUser(this.userForm.value).subscribe((user) => {
-      alert('User Created Successfully');
+      this.snack.open('User deleted successfully', 'OK', {duration: 2000});
       this.router.navigate(['/']);
+    }, err => {
+      this.snack.open('Something went wrong', undefined, {duration: 2000});
     });
   }
 }

@@ -33,9 +33,9 @@ app.get('/getUsers', async (req, res) => {
 
 //get user by id
 
-app.get('/user/:id', async (req, res) => {
+app.get('/getUser', async (req, res) => {
     try{
-        const user = await Users.findById(req.params.id);
+        const user = await Users.findById(req.query.id);
         if(user === null){
             res.status(404).send({
                 message: 'User not found'
@@ -68,9 +68,9 @@ app.post('/createUser', async (req, res) => {
 
 //update user
 
-app.put('/user/:id', async (req, res) => {
+app.put('/updateUser', async (req, res) => {
     try{
-        let newUser = await Users.findById({_id: req.params.id});
+        let newUser = await Users.findById({_id: req.query.id});
         if(newUser === null){
             res.status(404).send({
                 message: 'User not found'
@@ -79,8 +79,8 @@ app.put('/user/:id', async (req, res) => {
         }
         const user = new Users(req.body)
         await user.validate();
-        const a = await Users.updateOne({_id: req.params.id}, req.body);
-        newUser = await Users.findById({_id: req.params.id});
+        const a = await Users.updateOne({_id: req.query.id}, req.body);
+        newUser = await Users.findById({_id: req.query.id});
         res.send(newUser)
     }catch(err){
         res.send({
@@ -91,16 +91,16 @@ app.put('/user/:id', async (req, res) => {
 
 //delete user
 
-app.delete('/user/:id', async (req, res) => {
+app.delete('/deleteUser', async (req, res) => {
     try{
-        let newUser = await Users.findById({_id: req.params.id});
+        let newUser = await Users.findById({_id: req.query.id});
         if(newUser === null){
             res.status(404).send({
                 message: 'User not found'
             })
             return;
         }
-        const user = await Users.deleteOne({_id: req.params.id});
+        const user = await Users.deleteOne({_id: req.query.id});
         res.send({
             message: 'User deleted successfully'
         })
