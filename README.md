@@ -80,7 +80,7 @@ curl -X GET http://localhost:3000/getUsers
 
 **Method:** `POST`
 
-**Description:** Create Users
+**Description:** Create New User
 
 **Parameters:**
 1. name: String
@@ -95,11 +95,11 @@ curl -X POST http://localhost:3000/createUser
 
 ### 3. Get User
 
-**Endpoint:** `/user/:id`
+**Endpoint:** `getUser?id=%id%`
 
 **Method:** `GET`
 
-**Description:** Retrieve a specific user, Replace `:id` with user_id
+**Description:** Retrieve a specific user, Replace `%id%` with user_id
 
 **Example:**
 ```bash
@@ -108,12 +108,18 @@ curl -X GET http://localhost:3000/user/:id
 
 ### 4. Update User
 
-**Endpoint:** `/user/:id`
+**Endpoint:** `/updateUser?id=%id%`
 
 **Method:** `PUT`
 
-**Description:** Update specific user, Replace `:id` with user_id
+**Description:** Update specific user, Replace `%id%` with user_id
 
+**Parameters:**
+1. name: String
+2. age: Number
+3. email: String
+4. contact: Number
+   
 **Example:**
 ```bash
 curl -X PUT http://localhost:3000/user/:id
@@ -121,11 +127,11 @@ curl -X PUT http://localhost:3000/user/:id
 
 ### 5. Delete User
 
-**Endpoint:** `/user/:id`
+**Endpoint:** `/deleteUser?id=%id%`
 
 **Method:** `Delete`
 
-**Description:** Update specific user, Replace `:id` with user_id
+**Description:** Delete specific user, Replace `%id%` with user_id
 
 **Example:**
 ```bash
