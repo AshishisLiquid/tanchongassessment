@@ -115,10 +115,10 @@ curl -X GET http://localhost:3000/user/:id
 **Description:** Update specific user, Replace `:id` with user_id
 
 **Parameters:**
-1. name: String (Optional)
-2. age: Number (Optional)
-3. email: String (Optional)
-4. contact: Number (Optional)
+1. name: String
+2. age: Number
+3. email: String
+4. contact: Number
    
 **Example:**
 ```bash
