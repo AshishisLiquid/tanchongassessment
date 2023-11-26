@@ -30,4 +30,8 @@ export class UserService {
   deleteUser(id: string): Observable<User>{
     return this.httpClient.delete<User>(`${environment.apiUrl}deleteUser?id=${id}`)
   }
+
+  searchUser(query: string): Observable<User[]>{
+    return this.httpClient.get<User[]>(`${environment.apiUrl}searchUser?query=${query}`)
+  }
 }

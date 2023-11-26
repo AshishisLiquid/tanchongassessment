@@ -51,6 +51,22 @@ app.get('/getUser', async (req, res) => {
     }
 });
 
+app.get('/searchUser', async (req, res) => {
+    const query = req.query.query;
+    if(query === undefined || query === ''){
+        res.status(400).send({err: 'Invalid Query'})
+        return;
+    }
+    try{
+        const users = await Users.find({$or: [{name: {$regex: query, $options: 'i'}}, {email: {$regex: query, $options: 'i'}}]});
+        res.send(users)
+    }catch(err){
+        res.send({
+            err: err.message
+        })
+    }
+})
+
 //create user
 
 app.post('/createUser', async (req, res) => {

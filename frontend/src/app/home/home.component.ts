@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HomeComponent {
   users$: Observable<User[]> | undefined;
+  searchForm!: FormGroup;
   constructor(private userService: UserService, private router: Router, private matDialog: MatDialog, private snack: MatSnackBar) { }
 
   ngOnInit(): void {
     this.users$ = this.userService.getUsers();
+    this.searchForm = new FormGroup({
+      query: new FormControl('')
+    });
   }
 
   createUser(): void{
@@ -45,5 +50,15 @@ export class HomeComponent {
 
   editUser(user: User): void{
     this.router.navigate([`/edit-user/${user._id}`]);
+  }
+
+
+  searchUser(): void{
+    const query = this.searchForm.get('query')?.value;
+    if(query !== ''){
+      this.users$ = this.userService.searchUser(query);
+    }else{
+      this.users$ = this.userService.getUsers();
+    }
   }
 }
