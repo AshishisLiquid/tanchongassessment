@@ -95,7 +95,7 @@ curl -X POST http://localhost:3000/createUser
 
 ### 3. Get User
 
-**Endpoint:** `getUser?id=%id%`
+**Endpoint:** `getUser?id=`
 
 **Method:** `GET`
 
@@ -103,12 +103,12 @@ curl -X POST http://localhost:3000/createUser
 
 **Example:**
 ```bash
-curl -X GET http://localhost:3000/user/:id
+curl -X GET http://localhost:3000/getUser?id=
 ```
 
 ### 4. Update User
 
-**Endpoint:** `/updateUser?id=%id%`
+**Endpoint:** `/updateUser?id=`
 
 **Method:** `PUT`
 
@@ -122,18 +122,31 @@ curl -X GET http://localhost:3000/user/:id
    
 **Example:**
 ```bash
-curl -X PUT http://localhost:3000/user/:id
+curl -X PUT http://localhost:3000/updateUser?id=
 ```
 
 ### 5. Delete User
 
 **Endpoint:** `/deleteUser?id=%id%`
 
-**Method:** `Delete`
+**Method:** `DELETE`
 
 **Description:** Delete specific user, Replace `%id%` with user_id
 
 **Example:**
 ```bash
-curl -X DELETE http://localhost:3000/user/:id
+curl -X DELETE http://localhost:3000/deleteUser?id=%id%
+```
+
+### 5. Search User
+
+**Endpoint:** `/searchUser?query=`
+
+**Method:** `GET`
+
+**Description:** Get a List of Users whose email or name matches regex.
+
+**Example:**
+```bash
+curl -X GET http://localhost:3000/searchUser?query=
 ```
