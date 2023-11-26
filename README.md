@@ -95,7 +95,7 @@ curl -X POST http://localhost:3000/createUser
 
 ### 3. Get User
 
-**Endpoint:** `getUser?id=`
+**Endpoint:** `/getUser?id=`
 
 **Method:** `GET`
 
