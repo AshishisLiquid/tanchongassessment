@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { ShellComponent } from './shell/shell.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const components = [
@@ -37,7 +38,8 @@ const modules = [
   MatInputModule,
   MatSnackBarModule,
   RouterModule,
-  MatDialogModule
+  MatDialogModule,
+  MatPaginatorModule
 ]
 
 @NgModule({

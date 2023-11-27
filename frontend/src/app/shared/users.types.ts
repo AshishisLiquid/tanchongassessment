@@ -7,3 +7,11 @@ export interface User{
     createdAt?: string;
     updatedAt?: string;
 }
+
+export interface Hit{
+    hits: User[];
+    total: number;
+    page: number;
+    limit: number;
+    pages: number;
+}

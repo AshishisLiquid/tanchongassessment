@@ -23,7 +23,7 @@
                 <th>Edit Button</th>
                 <th>Delete Button</th>
             </tr>
-            <tr *ngFor="let user of users$ | async; index as i">
+            <tr *ngFor="let user of users; index as i">
                 <td>{{i+1}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
@@ -35,5 +35,7 @@
                 <td><button mat-raised-button color="warn" (click)="deleteUser(user)">Delete</button></td>
             </tr>
         </table>
+        <mat-paginator [length]="users.length" [pageSize]="pageSize" aria-label="Select page" (page)="changePaging($event)">
+        </mat-paginator>
     </mat-card-content>
 </mat-card>

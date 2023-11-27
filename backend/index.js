@@ -20,47 +20,91 @@ const mongoose = require('mongoose');
 //get all users
 
 app.get('/getUsers', async (req, res) => {
-    try{
-        const users = await Users.find({});
-        res.send(users)
-    }catch(err){
+    try {
+        const users = await Users.find({}).sort({ created_at: -1 }).limit(Number(req.query.limit)).skip(Number(req.query.page) * Number(req.query.limit));
+        let total = users.length
+        let limit = req.query.limit
+        if (limit === undefined) {
+            limit = 10;
+        }
+        let pages = Math.ceil(total / Number(limit));
+        let page = req.query.page
+        if (Number(page) > pages) {
+            res.status(400).send({
+                message: 'Invalid page number'
+            })
+            return;
+        }
+        if (page === undefined) {
+            page = 0;
+        }
+        res.send({
+            total: total,
+            pages: pages,
+            page: page,
+            limit: limit,
+            hits: users
+        })
+    } catch (err) {
         res.send({
             err: err.message
         })
-    
+
     }
 })
 
 //get user by id
 
 app.get('/getUser', async (req, res) => {
-    try{
+    try {
         const user = await Users.findById(req.query.id);
-        if(user === null){
+        if (user === null) {
             res.status(404).send({
                 message: 'User not found'
             })
             return;
         }
         res.send(user)
-    }catch(err){
+    } catch (err) {
         res.send({
             err: err.message
         })
-    
+
     }
 });
 
 app.get('/searchUser', async (req, res) => {
     const query = req.query.query;
-    if(query === undefined || query === ''){
-        res.status(400).send({err: 'Invalid Query'})
+    if (query === undefined || query === '') {
+        res.status(400).send({ err: 'Invalid Query' })
         return;
     }
-    try{
-        const users = await Users.find({$or: [{name: {$regex: query, $options: 'i'}}, {email: {$regex: query, $options: 'i'}}]});
-        res.send(users)
-    }catch(err){
+    try {
+        let page = req.query.page
+        if (page === undefined) {
+            page = 0;
+        }
+        let limit = req.query.limit
+        if (limit === undefined) {
+            limit = 10;
+        }
+        const users = await Users.find({$or: [{name: {$regex: query, $options: 'i'}}, {email: {$regex: query, $options: 'i'}}]}).sort({ created_at: -1 }).limit(Number(req.query.limit)).skip(Number(req.query.page) * Number(req.query.limit));
+        let total = users.length
+        let pages = Math.ceil(total / Number(limit));
+        if (Number(page) > pages) {
+            res.status(400).send({
+                message: 'Invalid page number'
+            })
+            return;
+        }
+        res.send({
+            total: total,
+            pages: pages,
+            page: page,
+            limit: limit,
+            hits: users
+        })
+    } catch (err) {
         res.send({
             err: err.message
         })
@@ -85,9 +129,9 @@ app.post('/createUser', async (req, res) => {
 //update user
 
 app.put('/updateUser', async (req, res) => {
-    try{
-        let newUser = await Users.findById({_id: req.query.id});
-        if(newUser === null){
+    try {
+        let newUser = await Users.findById({ _id: req.query.id });
+        if (newUser === null) {
             res.status(404).send({
                 message: 'User not found'
             })
@@ -95,10 +139,10 @@ app.put('/updateUser', async (req, res) => {
         }
         const user = new Users(req.body)
         await user.validate();
-        const a = await Users.updateOne({_id: req.query.id}, req.body);
-        newUser = await Users.findById({_id: req.query.id});
+        const a = await Users.updateOne({ _id: req.query.id }, req.body);
+        newUser = await Users.findById({ _id: req.query.id });
         res.send(newUser)
-    }catch(err){
+    } catch (err) {
         res.send({
             err: err.message
         })
@@ -108,19 +152,19 @@ app.put('/updateUser', async (req, res) => {
 //delete user
 
 app.delete('/deleteUser', async (req, res) => {
-    try{
-        let newUser = await Users.findById({_id: req.query.id});
-        if(newUser === null){
+    try {
+        let newUser = await Users.findById({ _id: req.query.id });
+        if (newUser === null) {
             res.status(404).send({
                 message: 'User not found'
             })
             return;
         }
-        const user = await Users.deleteOne({_id: req.query.id});
+        const user = await Users.deleteOne({ _id: req.query.id });
         res.send({
             message: 'User deleted successfully'
         })
-    }catch(err){
+    } catch (err) {
         res.send({
             err: err.message
         })
